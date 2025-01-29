@@ -161,11 +161,16 @@ While there are many different boats and yachts floating around, moored to the d
         ~ player_loc = deck_back
         ~ adam_state -= 1
         ~ billiam_state -= 1
+        ~ adv_conv_carl = 1
         You walk to the back of the boat and see Carl scanning the ocean with his binoculars. "Hey, Carl, what's up?"
         Without taking his eyes off the sky he says "Bird watching." he takes the binoculars away from his eyes and sighs. "Well, technically I'm 'Sky-watching' because I'm not seeing anything." He corrects himself.
         You look over and see that his notebook is open to a page with a depiction of a seagull on it. "That's pretty good," You say, pointing at it.
-        "Thanks
-        
+        "Thanks, my job is requiring more planning and sketching," He turns to face the sky again, peering through the binoculars again. "Can't just do it from scratch anymore."
+        You realize you've never asked him about his job before. "What exactly do you do, again?" 
+        "It's complicated," he says, brushing it off. The two of you scan the skies in silence. 
+        All of a sudden, the silence is pierced by Adam yelling in surprise.
+        "Catch something?" Carl yells back, closing up his notebook and putting the binoculars back in their case.
+        "It's huge!" Adam yells back. Carl snorts and sticks the notebook in his overly large pockets. "I'm tired, woke up way too early this morning." He begins heading to the cabin to go down to the bedroom. "Go see if those two need help. I don't think Billiam needs help in the kitchen, but Adam might need it with the engine."
         * -> Cont_Boat_Day_1_S_2
     
     = Cont_Boat_Day_1_S_2
