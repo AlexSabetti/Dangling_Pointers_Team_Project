@@ -83,14 +83,14 @@ While there are many different boats and yachts floating around, moored to the d
             * [Continue watching in silence] -> silent_fishing
         
         = silent_fishing
-            {"You know, I don't think any of us know what you do." Adams says, adjusting himself. | "Starting to get dark out, hopefully it stays clear so we can see the stars." You say. | "The three of-" Adam is cut off by a tug on the line.}
-            {"_Insert_Job_Here_" You reply. He reels in another small fish with a sigh. "Well, that's boring." | "Yup, hard to see them out in the city. Out in the country-side seeing them is a bit easier." He replies. | "Think it's another small one?" You ask}. 
+            {"You know, I don't think any of us know what you do." Adams says, adjusting himself. | "Starting to get dark out, hopefully it stays clear so we can see the stars." You say. | "What job did you get?" You ask. | "The three of-" Adam is cut off by a tug on the line.}
+            {"_Insert_Job_Here_" You reply. He reels in another small fish with a sigh. "Well, that's boring." | "Yup, hard to see them out in the city. Out in the country-side seeing them is a bit easier." He replies. |"Working at the local computer repair shop." He replies. "They pay well because I do more than work at the front." | "Think it's another small one?" You ask}. 
             + [Continue] -> silent_fishing_loop
         
         = silent_fishing_loop
             
             {
-            - counter == 2:
+            - counter == 3:
                 -> fishing_loop_out
             - else:
             ~ counter += 1
@@ -178,22 +178,68 @@ While there are many different boats and yachts floating around, moored to the d
         ~ billiam_loc = kitchen
         ~ adam_loc = engine_room
         ~ carl_loc = bedroom
-        * Help Billiam prepare caught fish for Dinner -> Fish_Billiam
-        * Check Engine with Adam -> Engine_Adam
+        * [Help Billiam prepare caught fish for Dinner] -> Fish_Billiam
+        * [Check Engine with Adam] -> Engine_Adam
         = Fish_Billiam
+            You begin helping Billiam with the fish. First, by looking over the fish for any visual issues. Adam probably had already done this but it was better safe than sorry.
+            Then, the two of you began filleting the fish, removing scales and other bones. It took a bit, but it would have taken a lot longer if it were just Billiam himself.
+            While you were waiting for each piece to cook, Billiam showed you specific traits of the fish you two were cooking.
+            When it was finally done, you called for Carl and Adam and began cleaning the place. Adam and Carl make their way inside and sit at the booth facing the table. 
+            Billiam and you finish up and join them at the table.
             // If already speaking with Billiam prior, new options, otherwise do the same as the first conversation that would have taken place
             ~ adam_state -= 1
             ~ carl_state -= 1
-            * -> Cont_Boat_Day_1_S_3
+            * [Continue] -> Cont_Boat_Day_1_S_3
         = Engine_Adam
-            // If already speaking with Adam prior, new options, otherwise do the same as the first converstation that would have taken place
+            You make your way down to the engine room. Adam's sitting there looking it over. 
+            "There's not much to do, down here." He says upon hearing you step on the ground. "Just had to make sure the replacement wasn't messing anything up."
+            "What happened to the old one?" You ask, as you give it a once-over.
+            "Have you ever seen someone chuck a scrunche-up ball of aluminum foil into a campfire and watch it for a bit?" He says, look back.
+            "Yeah, didn't we do that once?" You answer.
+            "Maybe, but that's what happened to the old one."
+            You give him a look of bewilderment. "...How?"
+            He laughs at your surprise before calming down. "We would cover the engine with a tarp, right?" 
+            "Right." You glance over at a thin, plastic tarp in the corner.
+            "That one's a temporary as we try to find one that can keep the engine clean without acting as a personal sauna."
+            "Oh." You say. Glancing back over at the new engine.
+            "'Oh', indeed." He chuckles, making his way over to the ladder. Just as he was doing that, Billiam's voice called down. "Fish is done, get in here!"
             ~ carl_state -= 1
             ~ billiam_state -= 1
-            * -> Cont_Boat_Day_1_S_3
+            * [Continue] -> Cont_Boat_Day_1_S_3
     
     = Cont_Boat_Day_1_S_3
+        "So," {adam_state > 2: Adam | Carl} speaks up over the plastic "clatter" of "silver"ware. "What's the plan for tomorrow?"
+        Billiam finishes chewing and swallows. "You know, there was this old buoy out near the far side that I etched my name into years ago, wanna go add yours?"
+        Carl wipes his hands on his jeans, earning a disaproving stare from Billiam, one which he ignores. "That sounds fun, why not?" He folds up his paper plate and stuffs it in the garbage can. 
+        "We could even use {adam_state > 2: the metal rods | {billiam_state > 2: one of the extra knives| {carl_state > 2: my pocket-knife}}}, says {adam_state > 2: Adam| {billiam_state > 2: Billiam| {carl_state > 2: Carl}}}, stretching his arms. 
+        You all grunt in agreement, the early morning proving too much for you evening people. And with that, the three of you all head down to the sleeping quarters. "Hey, {adam_state > 2: Adam|{billiam_state > 2: Billiam|{carl_state>2: Carl}}}," someone asks.
+        You all slip into something comfortable and turn off the overhead lamp. You stay up a bit longer as {adam_state > 2: Adam|{billiam_state > 2: Billiam|{carl_state>2: Carl}}} begins to snore. You had brought your camera, and despite all of the space you had, taking pictures of the open waters just wasn't appealing beyond one or two photos. The buoy, however, would do quite nicely. And with that, you soon pass into sleep from the boat rocking in the waves.
+        {
+        - adam_state == 2: 
+            ~ adam_state = 0
+            * [Continue] -> On_Boat_Day_2
+        - billiam_state == 2:
+            ~ billiam_state = 0
+            * [Continue] -> On_Boat_Day_2
+        - carl_state == 2:
+            ~ carl_state = 0
+            * [Continue] ->On_Boat_Day_2
+        }
+=== On_Boat_Day_2
+It's a beautiful morning. The sun shines down on the average-sized boat, revealing {adv_conv_adam == 1: two collapsable folding chairs on the front deck
+    
         // Go eat with group. Depending on who has the lowest score, have one question / answer be ignored by the rest of the group, don't make it obvious
         // Maybe some decisions in conversation, nothing big
         // If previously talked with Carl make asking advanced questions available
+
+
+
+
+
+
+
+
+
+
 
     -> END
