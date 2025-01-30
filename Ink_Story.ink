@@ -241,7 +241,7 @@ While there are many different boats and yachts floating around, moored to the d
     // Narrator describes the morning
     Sunlight poors into the sleeping quarters through a small port hole, landing right in your eyes. You awake to the hum of the engine, and an empty room. It appears like you were the last to get up.
     Climbing up the ladder, you make your way to the kitchen, passing by Billiam at the helm.
-    "Ah! Good morning!", he says with a smile. "We're already on our way to the spot. Go ahead and grab something to eat from the kitchen."
+    "Ah! Good morning!", he turns to say with coffee mug in hand. "We're already on our way to the spot. Go ahead and grab something to eat from the kitchen."
     You greet {adam_state > 2: Adam | Carl} in the kitchen, and  have yourself a bowl of ceareal.
     After breakfast, {adam_state > 2: Adam decides to go look through the shelves in the sleeping quarters, just to see what's in there. | Carl then fishes out a realistic platic duck from a duffle bag, and heads to the stern of the ship for reasons unknown...}
     
@@ -260,9 +260,14 @@ While there are many different boats and yachts floating around, moored to the d
 
     = Cards_Adam
         ~ player_loc = bedroom
-        // You tag along with Adam to export the shelves of the sleeping quarters. Adam finds some playing cards and the two of you decide to play a card game.
+        You tag along with Adam to export the shelves of the sleeping quarters. Each shelf is full of nautical knick knacks and trinkets. 
+        "How do these things stay upright out on the sea?", you think outloud.
+        "It looks like there's some puddy underneath most of these trinkets to hold them down.", He remarks.
+        "Huh. Clever..."
+        While snooping around, Adam finds some playing cards and the two of you decide to play a card game.
         // If already speaking with Adam prior, new options, otherwise do the same as the first converstation that would have taken place
         // talk about how it was sleeping on the boat?
+        // or maybe the choice here could just be what card game you play.
         
         ~ billiam_state -= 1
         ~ carl_state -= 1
@@ -302,32 +307,65 @@ While there are many different boats and yachts floating around, moored to the d
         * -> Cont_Boat_Day_2_S_2
     
     = Cont_Boat_Day_2_S_2
+        {Cards_Adam: during a moment of intense, yet quiet, card gaming, you hear the muffled gong of a buoy bell from outside. Billiam opens the sleeping quarters hatch and calls down to you two, "We're here!"} 
+        
+        You step out onto the deck as the ship slows to a crawl.
+        "I gotta be real careful with this. I don't wanna scuff up the side of the ship." comments Biliam as he inches it just close enough to the bouy to reach it from the ship's deck, and lowers the anchor.
+        
+        {adam_state > 2:
+        * [Check on Adam] -> CheckOn_Adam
+        }
+        {carl_state > 2:
+        * [Check on Carl] -> CheckOn_Carl
+        }
         // The boat reaches the buoy. The ancher is dropped.
         // you can choose to check out the old buoy with Billiam
         * [Check out the buoy with Billiam] ->BuoyCheck_Billiam
         // or you can go hang with the other person who's there
-        * [Check on Adam] ->CheckOn_Carl
+        
         
     = BuoyCheck_Billiam
         ~ player_loc = deck_front
         // You and Billiam check out the buoy 
-        // you can choose to write something on it with some spray paint
+        // you can choose to write something on it
         ~ adam_state -= 1
         ~ carl_state -= 1
-        * [Let time pass...] ->Cont_Boat_Day_2_S_3
+        
+        
+        * [Take a picture of Billiam and you infront of the buoy]->Picture_Billiam
+        
+        * [Add your name to the buoy] -> Write_Billiam
+        
+        = Picture_Billiam
+            // you and Billiam pose infront of the buoy for a picture.
+             * [Let time pass...] ->Cont_Boat_Day_2_S_3
+        
+        = Write_Billiam
+           // you scratch your name into the pealing paint of the buoy.
+            * [Let time pass...] ->Cont_Boat_Day_2_S_3
+        
         
     = CheckOn_Carl
         ~ player_loc = bedroom
-        //
+        // idk, maybe he's doodling in the sleeping quarters.
         ~ adam_state -= 1
         ~ billiam_state -= 1
         
         * [Let time pass...] ->Cont_Boat_Day_2_S_3
         
+        
+    = CheckOn_Adam
+        ~ player_loc = deck_back
+        // Adam's just chilling on the back of the boat. You hang with him for a bit.
+        ~ carl_state -= 1
+        ~ billiam_state -= 1
+        
+        * [Let time pass...] ->Cont_Boat_Day_2_S_3
     
     = Cont_Boat_Day_2_S_3
         ~ player_loc = deck_back
-        // The character with highest "value" asks you to try fishing with them
+        // The character with highest "value" asks you to try fishing with them. 
+        // the two of you fish for a bit.
         
         * [Let time pass...] ->Cont_Boat_Day_2_S_4
     
@@ -339,11 +377,25 @@ While there are many different boats and yachts floating around, moored to the d
     = Cont_Boat_Day_2_S_5
         ~ player_loc = kitchen
         // the player grabs a snack and proposes an idea on what to do next.
-        // but then a seagull suddenly attacks and tries to steal some food.
+        // but then a seagull suddenly attacks and tries to steal some food. halting your proposed plan
         
         // if Adam is still around, He will jump in and try to fend off the bird, and the player will have the option to help.
         // if Adam is not around, the player will have the option to fend off the bird byhimself.
-        * [Let time pass...] -> Cont_Boat_Day_2_S_6
+        { adam_state > 1 :
+        * [Help Adam fend off the bird] -> FendOffBird_Adam
+        }
+        { adam_state <= 1 :
+        * [Fend off the bird] -> FendOffBird_Alone
+        }
+        
+        = FendOffBird_Adam
+            // you grab something and help Adam shoo away the bird
+            * [Let time pass...] -> Cont_Boat_Day_2_S_6
+            
+        = FendOffBird_Alone
+            // you grab something try to shoo away the bird. The bird mamages to grab some of your snack though.
+            * [Let time pass...] -> Cont_Boat_Day_2_S_6
+        
         
     = Cont_Boat_Day_2_S_6
          ~ player_loc = kitchen
@@ -399,18 +451,21 @@ While there are many different boats and yachts floating around, moored to the d
         = paceAround
             ~ player_loc = deck_back
             // You paceAround the deck
+            You pace around the deck...
             * [Let time pass..]-> Cont_Boat_Day_3_S_5
         = layInBed
             ~ player_loc = bedroom
-            // You lie down in bed.
+            You lie down in bed...
+            //maybe if you've taken any photos, you can look at them
             * [Let time pass..]-> Cont_Boat_Day_3_S_5
         = readBook
             ~ player_loc = kitchen
-            // You sit down at the kitchen table and reed a book you found.
+            You find yourself a book and sit down at the kitchen table...
             * [Let time pass..]-> Cont_Boat_Day_3_S_5
     
     = Cont_Boat_Day_3_S_5
         // final dinner alone...
+        // you eat dinner alone.
         * [Turn in for the night] -> Night_3
     
     = Night_3
