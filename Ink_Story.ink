@@ -154,7 +154,6 @@ While there are many different boats and yachts floating around, moored to the d
             "Alright."
             ~ adam_state -= 1
             ~ carl_state -= 1
-            ~ adv_conv_bill = 1
             * [Continue] -> Cont_Boat_Day_1_S_2
         * -> Cont_Boat_Day_1_S_2
     = Bin_Carl
@@ -226,11 +225,144 @@ While there are many different boats and yachts floating around, moored to the d
             * [Continue] ->On_Boat_Day_2
         }
 === On_Boat_Day_2
-It's a beautiful morning. The sun shines down on the average-sized boat, revealing {adv_conv_adam == 1: two collapsable folding chairs on the front deck
+It's a beautiful morning. The sun shines down on the average-sized boat, revealing {adv_conv_adam == 1: two collapsable folding chairs on the front deck | the slightly damp deck}. If one were to look close enough at the water, they would see several schools of fish swimming about. There's a couple seagulls in the sky, but otherwise, there's not much else going on.
+You are awoken by dim sunlight shining through a little port hole, landing right in your eyes. You feel the ships engine already running as you sit up, taking the moment to look around the room. 
+Little nautical knick knacks lines the shelfs, held down by some sort of adheasive puddy to keep them from falling off while the ship is in motion. The bunk bed and extra sleeping bag both lay empty with messy sheets. Seems like the other two have already gotten up.
+    You get dressed, grab a snack bar, and pull yourself up the ladder into the cabin, where {billiam_state != 0: Billiam | {adam_state != 0: Adam}} is piloting the boat. His hair is a bit messy and he's humming something to himself.
+    "Hey, {billiam_state != 0: Billiam | {adam_state != 0: Adam}}," you say, unwrapping the bar and taking a bite. 
+    "Morning." he replies. 
+    {
+        - adam_state == 0:
+            * -> Adam_Absent_2
+        - billiam_state == 0:
+            * -> Billiam_Absent_2
+        - carl_state == 0:
+            * -> Carl_Absent_2
+    }
     
-        // Go eat with group. Depending on who has the lowest score, have one question / answer be ignored by the rest of the group, don't make it obvious
-        // Maybe some decisions in conversation, nothing big
-        // If previously talked with Carl make asking advanced questions available
+    = Adam_Absent_2
+        "Carl is out on the deck messing around with the fishing poles if you're wondering," He says. "If he hooks himself it's his fault, though."
+        * [Stay with Billiam] -> B_Pilot_talk
+        * [Check on Carl] -> C_Talk
+    = Billiam_Absent_2
+        "Carl is out on the deck messing around with the fishing poles if you're wondering," He says. "He better not break the poles though."
+        * [Stay with Billiam] -> A_Pilot_talk
+        * [Check on Carl] -> C_Talk
+    = Carl_Absent_2
+        "Adam should be in the kitchen if you're wondering." He says.
+        * [Stay with Billiam] -> B_Pilot_talk
+        * [Check on Adam] -> A_Talk
+        
+    = B_Pilot_talk
+        "I'm sure He'll be fine," you laugh, hiding your uncertainty, "What's the worst that could happen?"
+        "For starters we don't have anything for medical stuff." He retorts.
+        "Oh, well-"
+        "I'm joking," he cuts you off, "we have some in the cabinet in the back, no worries." 
+        The two of you sit in silence for a bit.
+        "Hey," You say, out of the blue, "Who's boat is this anyway, {adv_conv_bill == 1: I can't imagine your job can pay for this." | You said you work at the hotel, right? Can it even pay for this?"}
+        "It pays enough that I probably could at some point, but no, this is my dad's old boat." He towards you, "Don't you remember when we went out on the lake?"
+        You shake your head, you would have thought you would've remembered that. 
+        "Huh, then it must have been... {adam_state <= 0: No, I guess it was just me and him." | Adam, I think."}
+        The two of you hang out for a bit longer, until you start to see a colorful object in the distance.
+        "Hey," You say, pointing at whatever it was, "Is that it?"
+        "Looks like it, yeah."
+        ~ adam_state -= 1
+        ~ carl_state -= 1
+        * [Continue] -> Day_2_Buoy
+    = A_Pilot_talk
+        "Let's hope not," You say, "But it should be fine." You go out to the front deck and grab the chair Adam left outside the day day prior. You set it down close to the chair Adam is on and the two of you sit in silence as he makes his way towards the buoy's location.
+        "Hey, how do you know where we are going, anyway?" You ask, breaking the silence.
+        "GPS, satellite stuff and all that," He says, eyes still on the waters. "If you want me to explain how that works I don't know what to tell you." 
+        You chuckle. "Just make up some bull and we'll go with it."
+        "Fish magic."
+        "I thought it uses satellite?"
+        "SPACE fish magic." he retorts.
+        "I wonder what cosmic beings feed their space fish." You wonder aloud.
+        "Planets." He says, matter-of-factly.
+        "Isn't that just Galactus?"
+        "Is Galactus a space fish?"
+        "Shuddup." You fake pout and settle back into your seat. Not too long later, an object came be seen on the waters in the distance.
+        "Looks like that's it," Adam says, "I've been up piloting this for a long while, when we get there, I'm taking a nap, you and Carl can etch your names in it."
+        "Aye, Aye, captain."
+        ~ carl_state -= 1
+        * [Continue] -> Day_2_Buoy
+    = C_Talk
+        You leave the cabin and approach Carl, who looks to be attatching a plastic duck to one of {adam_state != 0: Adam's | the} fishing lines.
+        You pat him on the shoulder to let him know you're there and stand alongside him. "Mind if I ask what you're up to?"
+        Carl gives you a mischievious look, "Attaching Sir Reginald to the fishing line so I can drag him alongside the boat."
+        "Sir... Reginald?" You mutter, confused. "Wait, where did you get that anyway?"
+        "It's a company sample." He replies, "You know where I work, right?" He finishes up with hooking the duck- Sir, Reginald, sorry, to the rod, and checks if it'll stay on. Satisfied he throws it into the water.
+        "No," You rub the back of your head, "I'm just realizing I never asked before."
+        He sighs, fidgeting a bit. "I, uh," He pauses, then gets over it. "I co-run a rubber ducky making business."
+        "Okay, you're blowing smoke." You say, laughing, but stop once you realize his face is clearly not joking. "Oh, wait, really?"
+        "Yeah. It's weird." He shrugs, "But, hey, I get to help design them and I get to express my love of birds!"
+        "Neat," You say, somewhat tainted by envy, "From what it sounds like the two of you have gotten jobs you enjoy." 
+        He pauses, then pats you on the back. "You'll get that job you wanted, photography, was it?" 
+        "Yeah." You grumble. You've put your work out there to no avail. 
+        "You bring your fancy camera?" He asks, beginning to reel Sir Reginald (TM) in.
+        "No, didn't want to risk it," You reach into your pocket and pull out a small disposable polaroid camera. "Got this, though."
+        "You mind taking a picture?" He asks, lifting the rod up and holding the line so that it looks like he's showing off a fish he caught.
+        "Sure, I guess." You take a picture, and as you're waiting for it to finish developing, the two of you hear {adam_state > 0: Adam | Billiam} call out.
+        "We're here!"
+        ~ billiam_state -= 1
+        ~ adam_state -= 1
+        * [Continue] -> Day_2_Buoy
+    = A_Talk
+    "Hey, Adam, whatcha up to?" You say as you walk into the kitchen. 
+    "Just making some sandwhiches, want one?" He replies. Looking back down at his handiwork.
+    "Have you already made them?" You ask, walking over.
+    "Just made mine, help me make two more for the both of you."
+    As you do this, the two of you talk about random things that come to mind. Time passes, and soon enough Billiam calls out from the cabin.
+    "We're here!"
+    ~ billiam_state -= 1
+    * [Continue] -> Day_2_Buoy
+    
+    = Day_2_Buoy
+        The boat saddles up next to the orange and white buoy, rocking it a bit. {billiam_state > 0: Billiam | Adam} steps out of the cabin and meets up with you and {carl_state > 0: Carl | Adam}. 
+        The buoy isn't much to talk about, aside from {billiam_state > 0: a weathered, but still slightly visible name. Billiam. | its completely smooth surface.}
+        "Sweet," {carl_state > 0: Carl says, "I've got a pocket knife we can use." Taking it out as {billiam_state > 0: Billiam | Adam} holds it still. | Adam says, "I'll go grab those rods." When he comes back, Billiam holds it steady.} The {billiam_state > 0: two | three} of you take turns etching your names into the buoy. Once done, you admire your work.
+        "Your hand-etching is terrible." {carl_state > 0: Carl | Adam} chastises.
+        "So is yours. " You reply.
+        "Shut up, the both of you." {billiam_state > 0: Billiam sighs. | Adam laughs.}
+        "Well, now what." You ask. As it begins to drizzle.
+        "Well," {billiam_state > 0: Billiam | Adam} says, "theres an island west of here," He stops to correct himself, "Well, more like a weird sandbar, but we can go check that out?"
+        "Yeah, lets do that." You decide. The other nods in agreement. 
+        "Parker," {billiam_state > 0: Billiam | Adam} looks over at you, "I'll put the location in the GPS, do you mind getting us there? You remember how to drive, right?"
+        "Yeah, no worries." You assure him, and make your way to the cabin. The other two both know how to drive, and to be honest with yourself you don't have much confidence.
+        
+        {
+            - billiam_state > 0 && adam_state > 0:
+                * [Ask Billiam to stay] -> Bill_Talk_2
+                * [Ask Adam to Stay] -> Adam_Talk_2
+            - billiam_state > 0 && carl_state > 0:
+                * [Ask Billiam to stay] -> Bill_Talk_2
+                * [Ask Carl to stay] -> Carl_Talk_2
+            - else:
+                * [Ask Adam to stay] -> Adam_Talk_2
+                * [Ask Carl to stay] -> Carl_Talk_2
+        }
+        
+        = Bill_Talk_2
+            "Actually," You call out to Billiam before he goes down to the sleeping quarters, "You mind staying up here just so I can get you quickly if I mess something up?"
+            Billiam smiles, "Sure, but don't talk my ear off, I'm tired."
+            "You got it, boss."
+            Billiam pulls open the collapsed chair and lays down on it. You continue on to your destination. Billiam begins to snore, making you laugh quietly to yourself.
+            ~ carl_state = 0
+            ~ adam_state = 0
+            * [Continue] -> Island
+        = Adam_Talk_2
+            "Actually," You call out to Adam before he goes down to the sleeping quarters {billiam_state > 0: with Billiam. |}, "You mind staying up here just so I can get you quickly if I mess something up?"
+            Adam smirks, "Sure, we both know you'd get lost in an open parking lot."
+            "I'm not that bad." you grumble, "I think."
+            "Hence why," Adam grunts as he flops himself onto the collapsible chair, "I'm here, to make sure you don't send the two of us to the Bermuda Triangle."
+           "I'd probably manage to find a way to send us off the edge of the world, first."
+           He laughs, and the two of you sit in silence as you make your way to the sandbar.
+            ~ carl_state = 0
+            ~ billiam_state = 0
+            * [Continue] -> Island
+        = Carl_Talk_2
+        "Hey, Carl," You call out to him just before he goes all the way down the ladder into the sleeping quarters, "Mind keeping me company?" 
+        "Sure, why not?" He says, pulling himself back up and grabbing the chair- more akin to those sunbathing things you lay on- and laying down on it. 
 
 
 
