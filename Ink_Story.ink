@@ -14,6 +14,10 @@ VAR adam_loc = deck_front
 VAR billiam_loc = deck_front
 VAR carl_loc = deck_front
 
+VAR adv_conv_bill = 0
+VAR adv_conv_carl = 0
+VAR adv_conv_adam = 0
+
 VAR player_loc = deck_front
 
 VAR day = 1
@@ -24,6 +28,7 @@ It's a warm, beautiful day outside at the dock of the bay Mariana. The sky is cl
 While there are many different boats and yachts floating around, moored to the dock, only one is of interest to this story: a brown, four-section boat with upper and lower quarters.
 * [Continue] -> the_boat
 = the_boat
+    #IMAGE: assets/BoatLayout1_c1.png
     It sports a slightly raised, enclosed cabin where the steering wheel is housed. The recently-cleaned glass allows the pilot to look out and see the open waters. There is a cabinet in the back corner, a light on the back wall, a door that leads back out to the deck, and a ladder that leads to the sleeping quarters in the bottom layer of the boat.
     The kitchen is the largest of the rooms, but not by much. It contains basic cooking appliances, a table booth that sits four people, more cabinets, a mini-fridge, a fogged-up window and a door leading out to the deck. There is also door that leads to the back deck and a hatch that goes down to the engine room.
     The sleeping quarters is the second largest room of the boat. It has yellow walls, a small bookshelf doubling as a nightstand, two bunkbeds, a shelf spanning the front wall hidden behind a hinged-mirror.
@@ -40,22 +45,22 @@ While there are many different boats and yachts floating around, moored to the d
         "Parker!" He says, placing down the tackle box to gvie you a handshake, "Nice to see you!"
         You accept his handshake. "Nice to see you as well, it's been a while."
         "It sure has," he says, picking back up the tackle box and begins walking to the front end of the ship. "Carl should be down below deck." He calls over his shoulder. "We'll be leaving in a minute."
-        "Got it," You say, as you make your way into the cabin and down the ladder. Carl is down there, messing with a rubber duck and a fishing pole. 
+        "Got it," You say, as you make your way into the cabin and down the ladder. Carl is down there, cleaning the lens of his binoculars while sifting through his notebook.
         "Hey, Carl," You say, as you throw your belongings up to one of the top bunks, "How's it been?"
         "It's been alright," He replies, absorbed in his work, "and you?"
         "About the same."
-        The ship lurches forward a bit, almost knocking you off your feet. "And we're off!" Adam shouts from above. Carl finishes up with his little project and resets the fishing rod. "Watch your step, Parker." He says as he scrambles up the ladder to the cabin.
-        In the cabin, you can see Adam through the glass. He has returned to the supplies he brought out, fiddling with something in the tackle box on the port side of the ship. Somewhere inside the ship, you can hear pots and pans banging around as Billiam goes about his routines. Behind you, Carl fishes out a notebook and some binoculars from a bag before heading to the stern of the ship, for unknown purposes.
+        #IMAGE: assets/BoatLayout1_a1.png
+        The ship lurches forward a bit, almost knocking you off your feet. "And we're off!" Adam shouts from above. Carl finishes up with his little project and closes the notebook. "Watch your step, Parker." He says as he scrambles up the ladder to the cabin.
+        In the cabin, you can see Adam through the glass. He has returned to the supplies he brought out, fiddling with something in the tackle box on the port side of the ship. Somewhere inside the ship, you can hear pots and pans banging around as Billiam goes about his routines. Behind you, Carl fishes out a plastic duck from a floor compartment and brings it to the stern of the ship, for unknown purposes.
         Everyone else seems to have something to do. Perhaps you should tag along with one of them?
         ~ billiam_loc = kitchen
         ~ carl_loc = deck_back
         ~ player_loc = cabin
         * [Check in with Adam] -> On_Boat_Day_1.Fish_Adam
         * [Check in with Billiam] -> On_Boat_Day_1.Kitchen_Bill
-        * [Check in with Carl] -> On_Boat_Day_1.BirdWatching_Carl
+        * [Check in with Carl] -> On_Boat_Day_1.Bin_Carl
     
 === On_Boat_Day_1
-    
     = Fish_Adam
         ~ player_loc = deck_front
         You make your way to the front deck to where Adam is. He's pulled out a foldable chair and is now sat preparing the rod for fishing. 
@@ -79,133 +84,186 @@ While there are many different boats and yachts floating around, moored to the d
             * [Continue watching in silence] -> silent_fishing
         
         = silent_fishing
-            {"You know, I don't think any of us know what you do." Adams says, adjusting himself. | "Starting to get dark out, hopefully it stays clear so we can see the stars." You say. | "The three of-" Adam is cut off by a tug on the line.}
-            {"_Insert_Job_Here_" You reply. He reels in another small fish with a sigh. "Well, that's boring." | "Yup, hard to see them out in the city. Out in the country-side seeing them is a bit easier." He replies. | "Think it's another small one?" You ask.}
-            * [Continue] -> silent_fishing_loop
+            {"You know, I don't think any of us know what you do." Adams says, adjusting himself. | "Starting to get dark out, hopefully it stays clear so we can see the stars." You say. | "What job did you get?" You ask. | "The three of-" Adam is cut off by a tug on the line.}
+            {"_Insert_Job_Here_" You reply. He reels in another small fish with a sigh. "Well, that's boring." | "Yup, hard to see them out in the city. Out in the country-side seeing them is a bit easier." He replies. |"Working at the local computer repair shop." He replies. "They pay well because I do more than work at the front." | "Think it's another small one?" You ask}. 
+            + [Continue] -> silent_fishing_loop
+        
         = silent_fishing_loop
+            
             {
-            - counter == 2:
-                * -> fishing_loop_out
+            - counter == 3:
+                -> fishing_loop_out
             - else:
             ~ counter += 1
-                * -> silent_fishing_loop
+                -> silent_fishing
             }
         
         = fishing_loop_out
             Adam struggles to to reel in whatever is on the other end. But with your help, the two of you are able to pull it out of the water. 
             It was a large fish, larger than average compared to others of its kind in the area. Adam regards it proudly, "Very nice." and you nod in agreement.
-            "Well," He says, "I'm going to hand this over to Billiam, mind sticking that tackle box in the cabin?"
-            "Sure," You say, and do as he asked. 
-            * [Head to kitchen] -> Cont_Boat_Day_1_S_2
-            
+            "Well," He says, "I'm going to hand this over to Billiam, mind sticking that tackle box in the cabin?" Once I hand this over I'm going down to check the engine. 
+            "Sure," You say, and do as he asked. But what now?
+            * [Continue] -> Cont_Boat_Day_1_S_2
             
         = fish_with_adam
-        
-            // Describe interaction between Parker (Player) and Adam as they fish. 
-            // How has Adam been doing? Has he gotten the job he wanted? How's his family?
-            // Answer questions from Adam, how has Parker been doing? What's going on with his life? Do we shame the player for playing this interactive story instead of going out and touching grass?
-            ~ carl_state -= 1
-            ~ billiam_state -= 1
-            * [Let time pass] -> Cont_Boat_Day_1_S_2
-        
-    = Kitchen_Bill
-        ~ player_loc = kitchen
-        // Narrator describes kitchen and interaction between Parker (Player) and Billiam as they prepare the kitchen, storing bottled water, making sure the equipment (Stovetop, etc) is working, and storing the kitchenware
-        // How has Billiam been doing? How is his father? How is the business going?
-        * [ask about Billiams life] -> Life_Bill
-        * [ask what made him propose the boat trip] -> Trip_Origin
-        // Answer questions from Billiam, how is Parker been doing? What's going on with his life? Do we shame the player for not submitting a job application?
-        ~ adam_state -= 1
+             you reply. "Alrighty, then." He says as he hands you a rod. You kinda remember how you were supposed to do it, and a couple minutes later you both were sitting back, rods in hand, staring out into the waters.
+            * "How's the job been?" <> -> a_job_q
+            * "Has your situation gotten better? [] That job you talked about last time," <> -> a_job_q
         ~ carl_state -= 1
+        ~ billiam_state -= 1
+        ~ adv_conv_adam = 1
+        * -> Cont_Boat_Day_1_S_2
+    = Kitchen_Bill
+    ~ player_loc = kitchen
+        You make your way over to the door that leads into the kitchen.
+        "Room service!" You knock on the door, giggling to yourself.
+        "No," Billiam calls back, "You're supposed to just barge in."
+        "Is that what they do at the hotel?" You ask as you let yourself in.
+        "Yeah, we've gotten complaints about that." He says, handing you a washcloth. "Wipe the dust and gunk off the table and that counter, will you?"
+        You get to work as Billiam finishes putting away the supplies he brought: paper plates, plastic water bottles (Not Nestle), plastic "silver"ware, some snacks and some cooking implements. 
+        * "Speaking of the hotel, how's that been working out[?"]," <> -> hotel_bill
+        * "How's life been[?"]," -> life_bill
+        = hotel_bill
+            <> you ask, wringing out the washcloth after dunking it again.
+            "Pretty well, I run the finance part, lots of math and budgeting," He pauses, looks over an instruction booklet, "but otherwise it's good."
+            "Cool. It pays well?"
+            "Yeah, and it doesn't take all day either, so I usually end up helping down in the kitchen." He says, beginning to sharpen one of the knives. "Still wish I'd gone with being a chef sometimes, but being able to do that helps."
+            You nod, mostly to yourself, as he isn't looking at you. The both of you continue prepping the small kitchen. Once finished, Billiam looks over his shoulder.
+            "Hey, looks like Adam's caught a fish for dinner, I don't really need help, but you can hang out if you'd like. I know Adam has to check the engine because of issues earlier." He looks back over the counter, double checking to make sure everything is there. "Oh, the cutting board." He realizes, and pulls one out of the cabinet.
+            "Alright then."
+            ~ adam_state -= 1
+            ~ carl_state -= 1
+            ~ adv_conv_bill = 1
+            * [Continue] -> Cont_Boat_Day_1_S_2
         
-        = Life_Bill
-            // How has Billiam been doing? How is his father? How is the business going?
-            * [Let time pass...] -> Cont_Boat_Day_1_S_2
-        = Trip_Origin
-            // Player asks what made him propose this trip to begin with
-            // Billiam talks about how it's been a long time since they've all been together, and he wanted to make sure they all stayed in touch.
-            * [Let time pass...] -> Cont_Boat_Day_1_S_2
-        
-    = BirdWatching_Carl
+        = life_bill
+            <> you ask, wringing out the washcloth after dunking it again.
+            "The job has been great. Family," He sighs, "Not so much." He pulls out a cutting board and places it on the counter.
+            "What do you mean?" You ask, mercilessly attacking a stubborn, stupid stain on the table.
+            "Well, we found out my uncle has cancer," He says, "Auntie is devastated."
+            You pause, "It's that bad?" 
+            "No, but you know how she is." He chuckles, "She would treat a bike accident like it was a death in the family." He begins organizing some kitchen tools. "Bless her heart," He finally adds.
+            "So, what is it then?"
+            He shifts uncomfortably. "Uh..." He scratches his head, "Prostate cancer. Thankfully they caught it early."
+            "How does one catch prostate cancer early?" You wonder aloud, finally winning against that stain.
+            "I don't know ask the writer." He grumbles.
+            "The wha-"
+            The writer does not dignify Parker's question by finishing it. "Well, $@% you too." he thinks, stretching his fingers. "I'm on a time limit and I don't know how to make people seem relatable."
+            Self-deprecating fourth-wall breaking aside, the two of you finish up.
+            "You think he'll be alright?" You ask gingerly, not wanting to upset him.
+            "Last I heard, he's in recovery. So he's fine, I'm just free now to be pissed about the bill." There's a sound similar to a metal box hitting the ground, "Hey, looks like Adam's caught a fish for dinner, I don't really need help, but you can hang out if you'd like. I know Adam has to check the engine because of issues earlier." He looks back over the counter, double checking to make sure everything is there. "Oh, the knife." He realizes, and begins sharpening it.
+            "Alright."
+            ~ adam_state -= 1
+            ~ carl_state -= 1
+            ~ adv_conv_bill = 1
+            * [Continue] -> Cont_Boat_Day_1_S_2
+        * -> Cont_Boat_Day_1_S_2
+    = Bin_Carl
         ~ player_loc = deck_back
-        // Narrator describes back deck and interaction between Parker(Player) and Carl. Parker asks what he's up to, and Carl talks about trying to find a bird to draw.
-        // How has Carl been doing? How has his career being doing? etc.
-        // Answer questions from Carl, how is Parker doing? What's going on with his life? Do we shame the player for not starting up a million-dollar indie company that sells rubber ducks?
         ~ adam_state -= 1
         ~ billiam_state -= 1
-        * [Let time pass...] -> Cont_Boat_Day_1_S_2
+        ~ adv_conv_carl = 1
+        You walk to the back of the boat and see Carl scanning the ocean with his binoculars. "Hey, Carl, what's up?"
+        Without taking his eyes off the sky he says "Bird watching." he takes the binoculars away from his eyes and sighs. "Well, technically I'm 'Sky-watching' because I'm not seeing anything." He corrects himself.
+        You look over and see that his notebook is open to a page with a depiction of a seagull on it. "That's pretty good," You say, pointing at it.
+        "Thanks, my job is requiring more planning and sketching," He turns to face the sky again, peering through the binoculars again. "Can't just do it from scratch anymore."
+        You realize you've never asked him about his job before. "What exactly do you do, again?" 
+        "It's complicated," he says, brushing it off. The two of you scan the skies in silence. 
+        All of a sudden, the silence is pierced by Adam yelling in surprise.
+        "Catch something?" Carl yells back, closing up his notebook and putting the binoculars back in their case.
+        "It's huge!" Adam yells back. Carl snorts and sticks the notebook in his overly large pockets. "I'm tired, woke up way too early this morning." He begins heading to the cabin to go down to the bedroom. "Go see if those two need help. I don't think Billiam needs help in the kitchen, but Adam might need it with the engine."
+        * -> Cont_Boat_Day_1_S_2
     
     = Cont_Boat_Day_1_S_2
-        // Adam hands his prize fish over to Billiam and decides to go look around the sleeping quarters while food is being prepared. Meanwhile, Billiam fires up the stove.
-
-        // You once again find yourself unsure of what to do...
-        // Choice between tagging along with Adam or assisting Billiam with food.
+        // Engine is having trouble, choice between helping Adam or assisting Billiam with food.
         ~ billiam_loc = kitchen
-        ~ adam_loc = bedroom
-        ~ carl_loc = cabin
-        * [Tag along with Adam] -> TagAlong_Adam
+        ~ adam_loc = engine_room
+        ~ carl_loc = bedroom
         * [Help Billiam prepare caught fish for Dinner] -> Fish_Billiam
-        * [Ask about Carl's whereabouts] -> Question_Carl
-        = TagAlong_Adam
-            ~ player_loc = bedroom
-            // If already speaking with Adam prior, new options, otherwise do the same as the first converstation that would have taken place
-            // the two of you find some cards and decide to play some card games while waiting for dinner
-            // narrator can talk about them playing the card game for a little bit.
-            ~ carl_state -= 1
-            ~ billiam_state -= 1
-            * [Let time pass...] -> End_TagAlong_Adam
-            
-            = End_TagAlong_Adam
-                * [Head to kitchen] -> Cont_Boat_Day_1_S_3
-            
+        * [Check Engine with Adam] -> Engine_Adam
         = Fish_Billiam
+            You begin helping Billiam with the fish. First, by looking over the fish for any visual issues. Adam probably had already done this but it was better safe than sorry.
+            Then, the two of you began filleting the fish, removing scales and other bones. It took a bit, but it would have taken a lot longer if it were just Billiam himself.
+            While you were waiting for each piece to cook, Billiam showed you specific traits of the fish you two were cooking.
+            When it was finally done, you called for Carl and Adam and began cleaning the place. Adam and Carl make their way inside and sit at the booth facing the table. 
+            Billiam and you finish up and join them at the table.
             // If already speaking with Billiam prior, new options, otherwise do the same as the first conversation that would have taken place
             ~ adam_state -= 1
             ~ carl_state -= 1
-            * [Let time pass...] -> Cont_Boat_Day_1_S_3
-            
-        = Question_Carl
-            // Billiam says he doesn't know where Carl is, and the Parker's just like, "yeah ok"
-            // Maybe Carl's known to wander off without warning
-            // Returns back to previous 2 options
-            * [Tag along with Adam] -> TagAlong_Adam
-            * [Help Billiam prepare caught fish for Dinner] -> Fish_Billiam
+            * [Continue] -> Cont_Boat_Day_1_S_3
+        = Engine_Adam
+            You make your way down to the engine room. Adam's sitting there looking it over. 
+            "There's not much to do, down here." He says upon hearing you step on the ground. "Just had to make sure the replacement wasn't messing anything up."
+            "What happened to the old one?" You ask, as you give it a once-over.
+            "Have you ever seen someone chuck a scrunche-up ball of aluminum foil into a campfire and watch it for a bit?" He says, look back.
+            "Yeah, didn't we do that once?" You answer.
+            "Maybe, but that's what happened to the old one."
+            You give him a look of bewilderment. "...How?"
+            He laughs at your surprise before calming down. "We would cover the engine with a tarp, right?" 
+            "Right." You glance over at a thin, plastic tarp in the corner.
+            "That one's a temporary as we try to find one that can keep the engine clean without acting as a personal sauna."
+            "Oh." You say. Glancing back over at the new engine.
+            "'Oh', indeed." He chuckles, making his way over to the ladder. Just as he was doing that, Billiam's voice called down. "Fish is done, get in here!"
+            ~ carl_state -= 1
+            ~ billiam_state -= 1
+            * [Continue] -> Cont_Boat_Day_1_S_3
     
     = Cont_Boat_Day_1_S_3
-        ~ player_loc = kitchen
-        // Go eat with group. Depending on who has the lowest score, have one question / answer be ignored by the rest of the group, don't make it obvious
-        // Maybe some decisions in conversation, nothing big
-        // If previously talked with Carl make asking advanced questions available
-        * [Turn in for the night] -> Night_1
+        "So," {adam_state > 2: Adam | Carl} speaks up over the plastic "clatter" of "silver"ware. "What's the plan for tomorrow?"
+        Billiam finishes chewing and swallows. "You know, there was this old buoy out near the far side that I etched my name into years ago, wanna go add yours?"
+        Carl wipes his hands on his jeans, earning a disaproving stare from Billiam, one which he ignores. "That sounds fun, why not?" He folds up his paper plate and stuffs it in the garbage can. 
+        "We could even use {adam_state > 2: the metal rods | {billiam_state > 2: one of the extra knives| {carl_state > 2: my pocket-knife}}}, says {adam_state > 2: Adam| {billiam_state > 2: Billiam| {carl_state > 2: Carl}}}, stretching his arms. 
+        You all grunt in agreement, the early morning proving too much for you evening people. And with that, the three of you all head down to the sleeping quarters. "Hey, {adam_state > 2: Adam|{billiam_state > 2: Billiam|{carl_state>2: Carl}}}," someone asks.
+        You all slip into something comfortable and turn off the overhead lamp. You stay up a bit longer as {adam_state > 2: Adam|{billiam_state > 2: Billiam|{carl_state>2: Carl}}} begins to snore. You had brought your camera, and despite all of the space you had, taking pictures of the open waters just wasn't appealing beyond one or two photos. The buoy, however, would do quite nicely. And with that, you soon pass into sleep from the boat rocking in the waves.
         
-    
-    = Night_1
-        ~ player_loc = bedroom
-        // The sun has set, and everyone turns in for the night. There's only two beds in the sleeping quarters, but you and Adam brought sleeping bags. You and Adam put your sleeping bags down on the floor next to the bunk bed and lay down, the sea slowly rocking you to sleep.
-    
+        {
+        - adam_state == 2: 
+            ~ adam_state = 0
+            * [Continue] -> On_Boat_Day_2
+        - billiam_state == 2:
+            ~ billiam_state = 0
+            * [Continue] -> On_Boat_Day_2
+        - carl_state == 2:
+            ~ carl_state = 0
+            * [Continue] ->On_Boat_Day_2
+        }
+        // added this cuz it was breaking otherwise sometimes. idk why though.
         * [Slumber] -> On_Boat_Day_2
-    
 === On_Boat_Day_2
+    Day 2
+    
+    It's a beautiful morning. The sun shines down on the average-sized boat, revealing {adv_conv_adam == 1: two collapsable folding chairs on the front deck}
+    
+    // Go eat with group. Depending on who has the lowest score, have one question / answer be ignored by the rest of the group, don't make it obvious
+    // Maybe some decisions in conversation, nothing big
+    // If previously talked with Carl make asking advanced questions available
+    
     // Narrator describes the morning
-    // The player wakes up in the sleeping quarters. Everyone else has already gotten up.
-    // You make your way to the kitchen, bumping into Billiam in the helm along the way. 
-    // You reach the kitchen where the others are and make yourself some breakfast. They inform you that they're heading to an old Buoy. Apparently Billiam sprayed some graffiti on it a couple years back and they were gonna see if it was still there..
-    // After breakfast, Adam decides to check on the engine. He reveals a hatch in the floor of the kitchen leading down to the engine, and decends into the belly of the beast. It looks dark and damp down there, but could be interesting to checkout?
-    // Carl then fishes out a realistic platic duck from a duffle bag, and heads to the stern of the ship for reasons unknown...
-    // In the meantime, what will you do?
+    Sunlight poors into the sleeping quarters through a small port hole, landing right in your eyes. You awake to the hum of the engine, and an empty room. It appears like you were the last to get up.
+    Climbing up the ladder, you make your way to the kitchen, passing by Billiam at the helm.
+    "Ah! Good morning!", he says with a smile. "We're already on our way to the spot. Go ahead and grab something to eat from the kitchen."
+    You greet {adam_state > 2: Adam | Carl} in the kitchen, and  have yourself a bowl of ceareal.
+    After breakfast, {adam_state > 2: Adam decides to go look through the shelves in the sleeping quarters, just to see what's in there. | Carl then fishes out a realistic platic duck from a duffle bag, and heads to the stern of the ship for reasons unknown...}
+    
+    In the meantime, what will you do?
     ~ adam_loc = engine_room
     ~ billiam_loc = cabin
     ~ carl_loc = deck_back
-    * -> Engine_Adam
-    * -> Drive_Billiam
-    * -> Duck_Carl
+    {adam_state > 2: 
+    * [Tag along with Adam] -> Cards_Adam
+    }
+    * [Hang with Billiam while he drives]-> Drive_Billiam
+    {carl_state > 2: 
+    * [Investigate Carl and his duck] -> Duck_Carl
+    }
     
 
-    = Engine_Adam
-        ~ player_loc = engine_room
-        // You tag along with Adam to check on the engine
+    = Cards_Adam
+        ~ player_loc = bedroom
+        // You tag along with Adam to export the shelves of the sleeping quarters. Adam finds some playing cards and the two of you decide to play a card game.
         // If already speaking with Adam prior, new options, otherwise do the same as the first converstation that would have taken place
-        // Talk about his experience with engines and what he's checking for
+        // talk about how it was sleeping on the boat?
+        
         ~ billiam_state -= 1
         ~ carl_state -= 1
         
@@ -247,8 +305,8 @@ While there are many different boats and yachts floating around, moored to the d
         // The boat reaches the buoy. The ancher is dropped.
         // you can choose to check out the old buoy with Billiam
         * [Check out the buoy with Billiam] ->BuoyCheck_Billiam
-        // or you can go check on Carl in the sleeping quarters
-        * [Check on Adan] ->CheckOn_Carl
+        // or you can go hang with the other person who's there
+        * [Check on Adam] ->CheckOn_Carl
         
     = BuoyCheck_Billiam
         ~ player_loc = deck_front
@@ -303,6 +361,8 @@ While there are many different boats and yachts floating around, moored to the d
         * [slumber] -> On_Boat_Day_3
 
 === On_Boat_Day_3
+    Day 3
+    
     // Narrator describes Parker (You) waking up. Parker slept in and it's now noon. It's no longer raining, but a thin fog blankets the sea.
     // The boat is already docked at the little island.
     // You and the one other character swim to the little island and hang there for a little bit
@@ -358,6 +418,7 @@ While there are many different boats and yachts floating around, moored to the d
         * [sleep]-> Boat_Day_4
 
 === Boat_Day_4
+    Day 4
     // Narrator describes scene
     * [Continue] -> Cont_Boat_Day_4_S_2
     
