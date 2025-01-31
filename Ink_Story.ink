@@ -21,7 +21,7 @@ VAR adv_conv_adam = 0
 VAR player_loc = deck_front
 
 VAR day = 1
-
+A BOAT
 * [Begin story?] -> Start
 === Start 
 It's a warm, beautiful day outside at the dock of the bay Mariana. The sky is cloudless and formations of seagulls fly overhead, gracing the pier with their obnoxious cries. // Location open to change
@@ -48,6 +48,7 @@ While there are many different boats and yachts floating around, moored to the d
         "Hey, Carl," You say, as you throw your belongings up to one of the top bunks, "How's it been?"
         "It's been alright," He replies, absorbed in his work, "and you?"
         "About the same."
+        "Hey," Adam calls, "Photo-boy, take a picture of us!" You make your way over and huddle together. You hold up the polaroid expendable camera that you brought and take a picture. Billiam's elbow accidently bumps you when you take it, making it a bit lopsided, but it'll do fine.
         The ship lurches forward a bit, almost knocking you off your feet. "And we're off!" Adam shouts from above. Carl finishes up with his little project and closes the notebook. "Watch your step, Parker." He says as he scrambles up the ladder to the cabin.
         In the cabin, you can see Adam through the glass. He has returned to the supplies he brought out, fiddling with something in the tackle box on the port side of the ship. Somewhere inside the ship, you can hear pots and pans banging around as Billiam goes about his routines. Behind you, Carl fishes out a plastic duck from a floor compartment and brings it to the stern of the ship, for unknown purposes.
         Everyone else seems to have something to do. Perhaps you should tag along with one of them?
@@ -246,7 +247,7 @@ Little nautical knick knacks lines the shelfs, held down by some sort of adheasi
         * [Check on Carl] -> C_Talk
     = Billiam_Absent_2
         "Carl is out on the deck messing around with the fishing poles if you're wondering," He says. "He better not break the poles though."
-        * [Stay with Billiam] -> A_Pilot_talk
+        * [Stay with Adam] -> A_Pilot_talk
         * [Check on Carl] -> C_Talk
     = Carl_Absent_2
         "Adam should be in the kitchen if you're wondering." He says.
@@ -260,7 +261,7 @@ Little nautical knick knacks lines the shelfs, held down by some sort of adheasi
         "I'm joking," he cuts you off, "we have some in the cabinet in the back, no worries." 
         The two of you sit in silence for a bit.
         "Hey," You say, out of the blue, "Who's boat is this anyway, {adv_conv_bill == 1: I can't imagine your job can pay for this." | You said you work at the hotel, right? Can it even pay for this?"}
-        "It pays enough that I probably could at some point, but no, this is my dad's old boat." He towards you, "Don't you remember when we went out on the lake?"
+        "It pays enough that I probably could at some point, but no, this is my mum's old boat." He towards you, "Don't you remember when we went out on the lake?"
         You shake your head, you would have thought you would've remembered that. 
         "Huh, then it must have been... {adam_state <= 0: No, I guess it was just me and him." | Adam, I think."}
         The two of you hang out for a bit longer, until you start to see a colorful object in the distance.
@@ -361,17 +362,91 @@ Little nautical knick knacks lines the shelfs, held down by some sort of adheasi
             ~ billiam_state = 0
             * [Continue] -> Island
         = Carl_Talk_2
-        "Hey, Carl," You call out to him just before he goes all the way down the ladder into the sleeping quarters, "Mind keeping me company?" 
-        "Sure, why not?" He says, pulling himself back up and grabbing the chair- more akin to those sunbathing things you lay on- and laying down on it. 
+            "Hey, Carl," You call out to him just before he goes all the way down the ladder into the sleeping quarters, "Mind keeping me company?" 
+            "Sure, why not?" He says, pulling himself back up and grabbing the chair- more akin to those sunbathing things you lay on- and laying down on it. He suddenly clutches his head, wincing.
+            "You alright?" You ask, eyes still on the water, not like there was traffic to worry about, being on a boat and all.
+            "Augh." He groaned, "Yeah, I'm fine, just a headache." He blocks his eyes with his hands and sighs.
+            "Doesn't look fine," You press, "You can go below if you want?"
+            "Yeah, I will, thanks. Sorry." He slowly makes his way down the ladder. "Hey," He suddenly calls back up, "Is something wrong with the bunk bed?"
+            You pause to think. "There shouldn't be anything wrong, what's up?"
+            "We just have two sleeping bags down here, don't know why else we'd bring them." He calls back up. You hear some shuffling below as he moves them around.
+            "There probably is, then." You decide, "Use the sleeping bag then." There's no response, and you take that lack of answer as him falling asleep. Poor guy.
+            ~ billiam_state = 0
+            ~ adam_state = 0
+            * [Continue] -> Island
+            
+        = Island
+            Despite how fun piloting the boat is, you have to admit that at the speed you're going, it lost it's charm and became mind-numbing real quick.
+            ...
+            It almost seems like the boat is moving a lot slower than normal. Maybe {adam_state > 0: Adam concerns | your concerns} were right earlier about the engine. 
+            ...
+            You look down at the GPS. Not too long now.
+            ...
+            You seem to be forgetting something. Or multiple somethings. Your head starts to hurt whenever you try to think about that.
+            ...
+            {
+                - carl_state > 0 || adam_state > 0: 
+                    You rented this boat, right? Probably should make sure it's clean when you get back. You winced as the pain came back, twice as hard. The pain hurt so much you forgot what you were just thinking about. The pain went away as fast as it had came.
+                        ...
+            }
+            You can see what looks like a very small patch of sand. Looks like you're here. 
+            * [Continue] -> island_2
+            = island_2
+            "Hey, {billiam_state > 0: Billiam," | {carl_state > 0: Carl," | Adam,"}} you say, "We're here."
+            "Alright, alright." He grumbles, "I'm coming."
+            The two of you make your way off the boat and onto the island. 
+            There's not much to see here, it's dotted with reeds, but not much else. The water isn't sparkly and it isn't as big as you were hoping. 
+            You start to question why you came. {billiam_state > 0: But you weren't going to ask Billiam about it, he seemed happy with it. | {adam_state > 0: But you weren't going to ask Adam about it, he seemed happy with it. | But you didn't want to think about it too much, it made your head hurt.}}
+            The two of you look around for anything interesting. There's some driftwood and some shells. The shells must have been clams because they've been pecked open and smell horrible. Not very good souviners, and you could always get reeds somewhere else.
+            The seagull overhead lands on the ship, then flaps into the kitchen. Shoot, you forgot to close the door.
+            You scramble onto the ship, your head is pounding, and this little thief is not helping. You shoo the gull out of the kitchen, but not before it takes one of your precious bread slices. Pesky birds.
+            You shake your fist at it as it makes its great escape.
+            You're tired, you need to work on your cardio if getting back onto the boat took that much out of you. You make sure both the kitchen and cabin doors are closed, then make your way down the ladder and to bed.
+            ...
+            * [Continue] -> q_ins_1
+            = q_ins_1
+                Why were there so many sleeping bags? Your head hurts.
+                ...
+                * [Continue] -> q_ins_2
+            = q_ins_2
+                You pick up one of the photos you took, a mostly spotless faded orange and white buoy. It has your name etched into it.
+                ...
+                * [Continue] -> q_ins_3
+            = q_ins_3
+                You drift off to sleep. You feel...
+                ...
+                Nothing.
+            * [Continue] -> Day_3
 
-
-
-
-
-
-
-
-
-
+=== Day_3
+    It's a foggy morning, and a single boat drifts in the waves. Or, at least the latter half, the front seems to have been grounded on a small island. The island isn't very large, it's dotted with reeds, not enough to hide the ground from a bird's-eye-view, but just enough that you wouldn't mistake for a sandbar. The sand is off-brown white-ish... it's tan. It's tan. Not the well-grained type that you'd find in tourist places like certain beaches in Hawaii, more like the type where if it gets wet enough, you might mistake it for mud. There's some seashells here and there, most of them pecked open, but it looks there's a hermit crab making it's way onto the deserted island.
+        There are no footprints, no one has been there for a while.
+        * [Continue] -> s_1
+    = s_1
+    The boat, however, is arguably more interesting. It's a bit damp, shaded dark grey and a very weathered grape. It has a flag on the top, handrails, and two doors. One that opens to the main cabin, and the other that opens to the kitchen.
+        * [Continue] -> s_2
+    = s_2
+    The cabin has a collapsable chair next to the chair in front of the controls. The windows are fogged, and a cabinet is open. There's hatch that leads down to the sleeping quarters. There are two sleeping bags, one of them is still warm, a bunkbed, a shelf of trinkets, a cabinet hidden behind a mirror. There are some photos on the ground, next to a polaroid camera. There's picture of an orange and white, spotless buoy. Another picture showing a fishing rod, with a rubber duck attached to the hook. The latter picture is different, because instead of focusing on the beautful duck, it seems to be focused behind it.
+    * [Continue] -> s_3
+    = s_3
+    Back up above, the kitchen is well used. There's an open peanut butter jar, a jam-coated knife ruining the perfect counter, and some bread scattered across the floor. Rye Bread, to be exact. Not moldy. Yet. There's a picture of the boat on the table, it's a bit lopsided, and the name of the boat is slightly off-frame. Whoever took the picture did a lousy job.
+        * [Continue] -> s_4
+    = s_4
+        ...
+        * [Continue] -> s_5
+    = s_5
+        ...
+        * [Continue] -> s_6
+    = s_6
+        ...
+        My head hurts.
+        * [Continue] -> s_7
+    = s_7
+        ...
+        ...
+        ...
+        ...
+        ...
+        AN EMPTY BOAT
 
     -> END
