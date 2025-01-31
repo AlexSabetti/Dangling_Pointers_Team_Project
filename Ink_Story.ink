@@ -213,19 +213,22 @@ While there are many different boats and yachts floating around, moored to the d
         "So," {adam_state > 2: Adam | Carl} speaks up over the plastic "clatter" of "silver"ware. "What's the plan for tomorrow?"
         Billiam finishes chewing and swallows. "You know, there was this old buoy out near the far side that I etched my name into years ago, wanna go add yours?"
         Carl wipes his hands on his jeans, earning a disaproving stare from Billiam, one which he ignores. "That sounds fun, why not?" He folds up his paper plate and stuffs it in the garbage can. 
+        * [Continue] -> Cont_Boat_Day_1_S_4
+        
+    = Cont_Boat_Day_1_S_4
         "We could even use {adam_state > 2: the metal rods | {billiam_state > 2: one of the extra knives| {carl_state > 2: my pocket-knife}}}, says {adam_state > 2: Adam| {billiam_state > 2: Billiam| {carl_state > 2: Carl}}}, stretching his arms. 
         You all grunt in agreement, the early morning proving too much for you evening people. And with that, the three of you all head down to the sleeping quarters. "Hey, {adam_state > 2: Adam|{billiam_state > 2: Billiam|{carl_state>2: Carl}}}," someone asks.
         You all slip into something comfortable and turn off the overhead lamp. You stay up a bit longer as {adam_state > 2: Adam|{billiam_state > 2: Billiam|{carl_state>2: Carl}}} begins to snore. You had brought your camera, and despite all of the space you had, taking pictures of the open waters just wasn't appealing beyond one or two photos. The buoy, however, would do quite nicely. And with that, you soon pass into sleep from the boat rocking in the waves.
         {
-        - adam_state == 2: 
+            - adam_state == 2: 
             ~ adam_state = 0
-            * [Continue] -> On_Boat_Day_2
+            * [Sleep] -> On_Boat_Day_2
         - billiam_state == 2:
             ~ billiam_state = 0
-            * [Continue] -> On_Boat_Day_2
+            * [Sleep] -> On_Boat_Day_2
         - carl_state == 2:
             ~ carl_state = 0
-            * [Continue] ->On_Boat_Day_2
+            * [Slumber] ->On_Boat_Day_2
         }
 === On_Boat_Day_2
 Day 2
@@ -425,7 +428,7 @@ Little nautical knick knacks lines the shelfs, held down by some sort of adheasi
                 You drift off to sleep. You feel...
                 ...
                 Nothing.
-            * [Continue] -> Day_3
+            * [...] -> Day_3
 
 === Day_3
 Day 3
